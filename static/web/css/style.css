@@ -363,7 +363,7 @@ footer {
     background: rgba(49, 49, 49, 0.7);
     right: 0;
     padding: 45px;
-    margin-top: 87px;
+    margin-top: 33px;
 }
 
 .ayurrr h2,
@@ -383,9 +383,9 @@ p {
 }
 
 .ayurrr3 {
-    margin-top: 40px;
+    margin-top: 10px;
     z-index: 10;
-    padding: 40px;
+    padding: 25px;
 }
 
 .mb-200 {
