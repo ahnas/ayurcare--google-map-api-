@@ -19,8 +19,9 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
 
     'versatileimagefield',
-     'tinymce',
-
+    'tinymce',
+    
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -94,6 +95,12 @@ VERSATILEIMAGEFIELD_SETTINGS = {
     'image_key_post_processor': None,
     'progressive_jpeg': False
 }
+
+
+
+
+
+
 
 
 AUTH_PASSWORD_VALIDATORS = [

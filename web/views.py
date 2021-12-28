@@ -4,7 +4,10 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import json
-from .models import Gallery,Treatement,Branch,Doctor,Schedule
+from web.models import Gallery,Treatement
+from official.models import Doctor,Schedule
+from .forms import ContactForm
+
 
 def index(request):
     context = {
@@ -21,9 +24,27 @@ def about(request):
 
 
 def contact(request):
-    context = {
-        "is_contact" : True
-    }
+    form = ContactForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            response_data = {
+                "status" : "true",
+                "title" : "Successfully Submitted",
+                "message" : "Message successfully updated"
+            }
+        else:
+            print (form.errors)
+            response_data = {
+                "status" : "false",
+                "title" : "Form validation error",
+            }
+        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+    else:
+        context = {
+            'is_contact' : True,
+            'form' : form,
+        }
     return render(request, 'web/contact.html',context)
 
 
@@ -45,10 +66,12 @@ def products(request):
 
 
 def doctors(request):
-    schedules = Schedule.objects.filter()  
+    schedule = Schedule.objects.all()
+    
     context = {
         "is_doctors" : True,
-        "schedules" : schedules,
+        
+        "schedule":schedule,
     }
     return render(request, 'web/doctor.html',context)
 
@@ -59,4 +82,39 @@ def branch(request):
     }
     return render(request, 'web/branch.html',context)
 
+
+def book(request,slug):
+    schedule = get_object_or_404(Schedule,slug=slug)
+    if request.POST:
+        ptname = request.POST['ptname']
+        ptnumber = request.POST['ptnumber']
+        start = schedule.start_time.strftime("%I:%M %p")
+        end = schedule.end_time.strftime("%I:%M %p")
+
+        whatsappbtn = 'https://wa.me/+91'+str(schedule.branch.phone)
+
+        messagestring = '?text=Patient Name : '+ptname+'%0aPatient Number : '+ptnumber+\
+                "%0a*-----Booking Details------*"
+
+        messagestring += '%0aBranch : '+schedule.branch.name+\
+                         '%0a'+schedule.branch.location+\
+                         '%0aDoctor : '+schedule.doctor.name+\
+                         '%0aTime : '+str(start)+' - '+str(end)
+        whatsappbtn += messagestring
+        context = {
+           
+        "is_book" : True,
+        "schedule":schedule,
+        "whatsappbtn":whatsappbtn,
+        }
+        
+        return render(request, 'web/book.html',context)
+    
+
+    context = {
+        "is_book" : True,
+        "schedule":schedule,
+        
+    }
+    return render(request, 'web/book.html',context)
 

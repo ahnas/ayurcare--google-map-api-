@@ -13,14 +13,20 @@
 <div class="container withus">
     <div class="row text-center">
         <div class="col-lg-6 col-md-6 col-sm-12 col-12 contact">
-            <form action="" method="post">
+           
+            <form action="" method="post" class="ajax">
+                {% csrf_token %}
+
                 <h3 class="mb-4">Contact Details</h3>
-                <input class="form-control" name="name" placeholder="Name..." /><br />
-                <input class="form-control" name="phone" placeholder="Phone..." /><br />
-                <input class="form-control" name="email" placeholder="E-mail..." /><br />
-                <textarea class="form-control" name="text" placeholder="Message" style="height:120px;"></textarea><br />
-                <button class="btn btn-primaryy" type="submit">SEND MESSAGE</button>
+                {{form.name}} <br>
+                {{form.phone}} <br>
+                {{form.email}} <br> <br>
+                {{form.text}} <br> 
+                <br>
+               <button class="btn btn-primaryy" type="submit">SEND MESSAGE</button>
+
               </form>
+
         </div>
         <div class="col-lg-5 col-md-6 col-sm-12 col-12 touch">
             <h4 class="text-center mb-3">Get in Touch with Us</h4>
@@ -35,3 +41,82 @@
 </div>
 
 {% endblock %}
+{% block javascript %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.15.3/dist/sweetalert2.all.min.js"></script>
+    <script>
+        $(document).on('submit', 'form.ajax', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var data = new FormData(this);
+            var action_url = $this.attr('action');
+            var reset = $this.hasClass('reset');
+            var reload = $this.hasClass('reload');
+            var redirect = $this.hasClass('redirect');
+            var redirect_url = $this.attr('data-redirect');
+
+            $.ajax({
+                url: action_url,
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: "json",
+
+                success: function(data) {
+
+                    var status = data.status;
+                    var title = data.title;
+                    var message = data.message;
+                    var pk = data.pk;
+
+                    if (status == "true") {
+                        if (title) {
+                            title = title;
+                        } else {
+                            title = "Success";
+                        }
+
+                        Swal.fire({
+                            title: title,
+                            html: message,
+                            icon: 'success',
+                        }).then(function() {
+                            if (redirect) {
+                                window.location.href = redirect_url;
+                            }
+                            if (reload) {
+                                window.location.reload();
+                            }
+                            if (reset) {
+                                window.location.reset();
+                            }
+                        });
+
+                    } else {
+                        if (title) {
+                            title = title;
+                        } else {
+                            title = "An Error Occurred";
+                        }
+                        Swal.fire({
+                            title: title,
+                            html: message,
+                            icon: "error"
+                        });
+
+                    }
+                },
+                error: function(data) {
+                    var title = "An error occurred";
+                    var message = "something went wrong";
+                    Swal.fire({
+                        title: title,
+                        html: message,
+                        icon: "error"
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock javascript %}

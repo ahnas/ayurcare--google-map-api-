@@ -1,0 +1,119 @@
+{% extends 'official/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- ======= Contact Section ======= -->
+<section id="contact" class="contact">
+  <div class="container">
+
+  
+
+    <h3 class="text-center">Add Schedule</h3>
+
+
+
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
+      <div class="col-xl-9 col-lg-12 mt-4">
+        <form action="" method="POST" class="ajax">
+          {% csrf_token %}
+
+          <div class="row mb-3 justify-content-center">
+            <div class="col-md-2 form-group place-self-center">
+              <label for="treatment">Treatment : </label>
+            </div>
+            <div class="col-md-8 form-group mt-3 mt-md-0">
+              {{scheduleform.treatment}}
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-center">
+            <div class="col-md-2 form-group place-self-center">
+              <label for="branch">branch : </label>
+            </div>
+            <div class="col-md-8 form-group mt-3 mt-md-0">
+              {{scheduleform.branch}}
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-center">
+            <div class="col-md-2 form-group place-self-center">
+              <label for="doctor">doctor : </label>
+            </div>
+            <div class="col-md-8 form-group mt-3 mt-md-0">
+              <div class="row">
+                <div class="col-12">{{scheduleform.doctor}}</div>
+                <div class="col-6 d-none">{{scheduleform.slug}}</div>
+              </div>
+
+
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-center">
+            <div class="col-md-2 form-group place-self-center">
+              <label for="start_time">start_time : </label>
+            </div>
+            <div class="col-md-8 form-group mt-3 mt-md-0">
+              {{scheduleform.start_time}}
+            </div>
+          </div>
+          <div class="row mb-3 justify-content-center">
+            <div class="col-md-2 form-group place-self-center">
+              <label for="end_time">end_time : </label>
+            </div>
+            <div class="col-md-8 form-group mt-3 mt-md-0">
+              {{scheduleform.end_time}}
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+          <div class="my-3">
+
+          </div>
+          <div class="text-center">
+            <button class="btn btn-danger" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section><!-- End Contact Section -->
+
+
+
+
+
+
+
+{% endblock %}
+{% block javascript %}
+
+
+
+<script>
+  $('#doctid').change(function () {
+
+
+    $('#slugid').val($(this).val())
+  });
+</script>
+
+
+<script>
+  $('#branid').children().first().remove();
+  $("<option selected>--Select Branch--</option>").insertBefore($('#branid option:first-child'));
+
+  $('#doctid').children().first().remove();
+  $("<option selected>--Select Doctor--</option>").insertBefore($('#doctid option:first-child'));
+
+
+
+</script>
+
+{% endblock %}

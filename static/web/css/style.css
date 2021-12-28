@@ -628,3 +628,34 @@ p {
 .about-link:hover {
     cursor: pointer;
 }
+
+.colr-bg{
+    background: rgba(49, 49, 49, 0.9);
+    text-align: -webkit-center;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+
+.posit-absl{
+   
+    position: fixed;
+    z-index: 1000;
+    top: 33%;
+    left: 33%;
+}
+
+#clo .closse {
+    float: right;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    color: rgb(255, 255, 255);
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 10px;
+}
+
+#clo {
+    cursor: pointer;
+}

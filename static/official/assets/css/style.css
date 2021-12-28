@@ -1953,3 +1953,15 @@ section {
   color: #fff;
   text-decoration: none;
 }
+
+.place-self-center{
+  place-self: center;
+}
+
+.justify-content-center{
+  justify-content: center;
+}
+
+.hight-adj{
+  height : 40px;
+}

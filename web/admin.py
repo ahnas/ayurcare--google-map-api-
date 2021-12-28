@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Treatement,Gallery,Branch,Schedule,Doctor
+from .models import Treatement,Gallery,Contact
 
 
 @admin.register(Treatement)
@@ -12,16 +12,7 @@ class GalleryAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Branch)
-class BranchAdmin(admin.ModelAdmin):
+@admin.register(Contact)
+class ContactAdmin(admin.ModelAdmin):
     pass
 
-
-@admin.register(Doctor)
-class DoctorAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Schedule)
-class ScheduleAdmin(admin.ModelAdmin):
-    pass
