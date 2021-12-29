@@ -1,11 +1,12 @@
 from django.db import models
+from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import json
 from web.models import Gallery,Treatement
-from official.models import Doctor,Schedule
+from official.models import Branch, Doctor,Schedule
 from .forms import ContactForm
 
 
@@ -117,4 +118,9 @@ def book(request,slug):
         
     }
     return render(request, 'web/book.html',context)
+
+
+def branchmark(request):
+    branchmark = list(Branch.objects.values())
+    return JsonResponse(branchmark, safe=False)  
 

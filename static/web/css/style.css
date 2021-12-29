@@ -533,8 +533,8 @@ p {
 }
 
 .searcc {
-    right: 160px;
-    top: 260px;
+    right: 0px;
+    
     padding: 35px 0px;
     background: rgb(0 0 0 / 65%);
     text-align: -webkit-center;

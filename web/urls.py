@@ -10,7 +10,9 @@ urlpatterns = [
     path('contact/',views.contact,name="contact"),
     path('doctors/',views.doctors,name="doctors"),
     path('galleries/',views.galleries,name="gallery"),
-    path('products/',views.products,name="products"),
+    path('products/',views.products,name="products"), 
     path('book/<str:slug>',views.book,name="book"),
+
+    path('branchmark/',views.branchmark,name="branchmark"),
 
 ]
