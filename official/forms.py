@@ -2,10 +2,21 @@ from django import forms
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.db.models import fields
-from .models import Branch,Doctor,Schedule
+from .models import Branch,Doctor,Schedule,DistrictMap
 from django.forms.widgets import SelectMultiple, TextInput, Textarea, EmailInput, CheckboxInput,URLInput, Select, NumberInput, RadioSelect, FileInput,TimeInput
 from django.contrib.admin import widgets 
 from django.contrib.auth.models import User
+
+
+class DistrictMapForm(forms.ModelForm):
+    class Meta:
+        model = DistrictMap
+        fields = '__all__'
+        widgets = {
+            'name': TextInput(attrs={'class': 'form-control', 'placeholder': 'District Name',}),
+            'latitude': TextInput(attrs={'class': 'form-control lat', 'placeholder': 'District latitude'}),
+            'longitude': TextInput(attrs={'class': 'form-control lon', 'placeholder': 'District longitude'}),
+        }
 
 class BranchForm(forms.ModelForm):
     class Meta:

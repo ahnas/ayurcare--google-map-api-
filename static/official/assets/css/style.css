@@ -1965,3 +1965,32 @@ section {
 .hight-adj{
   height : 40px;
 }
+
+
+.adnew{
+  float: right;
+}
+.adnew a{
+  color: white;
+    float: right;
+    background: #dc3d09;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 6px 30px;
+    border-radius: 5px;
+}
+.acti{
+  display: flex;
+}
+
+.acti i{
+    padding: 4px 8px;
+    background: #dc3d09;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.ng-red{
+  background: #960c0c  !important;
+}

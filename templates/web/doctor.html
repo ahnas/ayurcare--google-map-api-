@@ -35,12 +35,14 @@
 
 <div class="container text-center doctor mb-5">
     <div class="row justify-content-center">
-        {% for schedule in schedule %}
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12 box-50 mb-4">
-            <img src="{{schedule.doctor.image.crop.290x400}}" width="100%" alt="">
-            <h3>{{schedule.doctor.name}}</h3>
-            <h4>Reg No : {{schedule.doctor.register_number}}</h4>
-            <h4>{{schedule.doctor.qualification}}</h4>
+        
+        {% for DoctorandSchedule in DoctorandSchedules %}
+        {% if DoctorandSchedule.count %}
+        <div class="col-lg-4 col-md-6 col-sm-12 col-12 box-50 mb-4 pb-4">
+            <img src="{{DoctorandSchedule.doctor.image.crop.290x400}}" width="100%" alt="">
+            <h3>{{DoctorandDoctorandSchedule.doctor.name}}</h3>
+            <h4>Reg No : {{DoctorandSchedule.doctor.register_number}}</h4>
+            <h4>{{DoctorandSchedule.doctor.qualification}}</h4>
             <div class="vector text-center mt-2 mb-2">
                 <svg width="15" height="15" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -61,12 +63,14 @@
             </div>
 
 
-            <button id="btn{{schedule.id}}" onclick="btnclick('{{schedule.id}}')" class="read check">Check Availability <span class="calender"><i
+            <button id="btn{{DoctorandSchedule.doctor.id}}" onclick="btnclick('{{DoctorandSchedule.doctor.id}}')" class="read check">Check Availability <span class="calender"><i
                         class="icofont-ui-calendar"></i></span></button>
-
-            <div id="bx-shw{{schedule.id}}" class="appointment mt-4">
+                        <div id="bx-shw{{DoctorandSchedule.doctor.id}}" class="appointment mt-4">
+                {% for schedule in DoctorandSchedule.schedules %}
+           
 
                 <h4 class="mb-3">Appoinment informations</h4>
+                
                 <div class="row pl-5">
                     <div class="col-lg-2 col-2 p-0"><i class="icofont-building"></i></div>
                     <div class="col-lg-10 col-10 p-0">
@@ -83,14 +87,18 @@
                                 {{schedule.start_time}} to {{schedule.end_time}}</span>
                     </div>
                 </div>
-               <a href="{{schedule.get_absolute_url}}"> <button class="read check appoi mt-3">Book Appoinment</button> </a>
+               <a href="{% url 'web:book' schedule.id %}"> <button class="read check appoi mt-3">Book Appoinment</button> </a>
 
+               <hr style="background: black; height: 1px;">
+            
+               {% endfor %}
             </div>
 
 
         </div>
+        
+        {% endif %}
         {% endfor %}
-
 
 
         {% comment %}

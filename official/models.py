@@ -3,6 +3,14 @@ from versatileimagefield.fields import VersatileImageField
 from django.urls import reverse
 
 
+class DistrictMap(models.Model):
+    name       = models.CharField(max_length=255,unique=True)
+    latitude   = models.CharField(max_length=255)
+    longitude  = models.CharField(max_length=255)
+
+    def __str__(self):
+        return str(self.name)
+
 
 class Branch(models.Model):
     name       = models.CharField(max_length=255,unique=True)
@@ -27,16 +35,15 @@ class Doctor(models.Model):
     def __str__(self):
         return str(self.name)
 
+
 class Schedule(models.Model):
     treatment = models.CharField(max_length=100)
     branch = models.ForeignKey(Branch,on_delete = models.CASCADE)
     doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE)
-    slug       = models.SlugField(max_length=255,unique=True)
     start_time = models.TimeField(max_length=100)
     end_time = models.TimeField(max_length=100)
 
-    def get_absolute_url(self):
-        return reverse('web:book', kwargs={'slug':self.slug})
+   
 
     def __str__(self):
         return str(self.treatment)

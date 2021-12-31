@@ -1,11 +1,12 @@
 from django.db import models
+from django.http.response import JsonResponse
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import json
 from web.models import Gallery,Treatement
-from official.models import Doctor,Schedule
+from official.models import Branch, Doctor,Schedule,DistrictMap
 from .forms import ContactForm
 
 
@@ -66,55 +67,110 @@ def products(request):
 
 
 def doctors(request):
-    schedule = Schedule.objects.all()
+    doctors = Doctor.objects.all()
+    class DoctorandSchedule:
+        def __init__(self,doctor,schedules,count):
+            self.doctor = doctor
+            self.schedules = schedules
+            self.count = count
+
+    DoctorandSchedules=[]
+
+    for d in doctors:
+        DoctorandSchedules.append(DoctorandSchedule(d,d.schedule_set.all(),d.schedule_set.filter().exists))
+    
     
     context = {
         "is_doctors" : True,
         
-        "schedule":schedule,
+        "DoctorandSchedules":DoctorandSchedules,
     }
     return render(request, 'web/doctor.html',context)
 
 
 def branch(request):
+    districtmap = DistrictMap.objects.all()
+    
     context = {
-        "is_branch" : True
+        "is_branch" : True,
+        "districtmap":districtmap,
     }
+    
     return render(request, 'web/branch.html',context)
 
 
-def book(request,slug):
-    schedule = get_object_or_404(Schedule,slug=slug)
+def branchbook(request,id):
+    branch = get_object_or_404(Branch,id=id)
+    schedules = Schedule.objects.filter(branch = branch)
+    whatsappbtn = ''
+    if request.POST:
+        scheduleID = request.POST['scheduleID']
+        brname = request.POST['brname']
+        brnumber = request.POST['brnumber']
+        
+        scheduleselect = Schedule.objects.get(id=scheduleID)
+
+        start = scheduleselect.start_time.strftime("%I:%M %p")
+        end = scheduleselect.end_time.strftime("%I:%M %p")
+
+        whatsappbtn = 'https://wa.me/+91'+str(branch.phone)
+
+        messagestring = '?text=Patient Name : '+brname+'%0aPatient Number : '+brnumber+\
+                "%0a*-----Booking Details------*"
+
+        messagestring += '%0aBranch : '+branch.name+\
+                         '%0aLocation : '+branch.location+\
+                         '%0aDoctor : '+scheduleselect.doctor.name+\
+                         '%0aTime : '+str(start)+' - '+str(end)
+
+        whatsappbtn += messagestring
+
+        schedules = Schedule.objects.filter(id=scheduleID)
+    context = {
+        "is_branchbook" : True,
+        "branch":branch,
+        "schedules":schedules,   
+        "whatsappbtn":whatsappbtn,
+    }
+    return render(request, 'web/branchbook.html',context)
+
+
+def book(request,id):
+    schedule = get_object_or_404(Schedule,id=id)
     if request.POST:
         ptname = request.POST['ptname']
         ptnumber = request.POST['ptnumber']
         start = schedule.start_time.strftime("%I:%M %p")
         end = schedule.end_time.strftime("%I:%M %p")
-
         whatsappbtn = 'https://wa.me/+91'+str(schedule.branch.phone)
-
         messagestring = '?text=Patient Name : '+ptname+'%0aPatient Number : '+ptnumber+\
                 "%0a*-----Booking Details------*"
-
         messagestring += '%0aBranch : '+schedule.branch.name+\
-                         '%0a'+schedule.branch.location+\
+                         '%0aLocation :'+schedule.branch.location+\
                          '%0aDoctor : '+schedule.doctor.name+\
                          '%0aTime : '+str(start)+' - '+str(end)
         whatsappbtn += messagestring
         context = {
-           
         "is_book" : True,
         "schedule":schedule,
         "whatsappbtn":whatsappbtn,
         }
         
         return render(request, 'web/book.html',context)
-    
-
     context = {
         "is_book" : True,
         "schedule":schedule,
-        
     }
     return render(request, 'web/book.html',context)
+
+
+def branchmark(request):
+    branchmark = list(Branch.objects.values())
+    return JsonResponse(branchmark, safe=False)
+
+
+def districtsr(request):
+    districtsr = list(DistrictMap.objects.values())
+    return JsonResponse(districtsr, safe=False)
+  
 
