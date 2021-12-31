@@ -64,6 +64,7 @@
 
       <nav id="navbar" class="navbar"> 
         <ul>
+          <li><a class="nav-link scrollto {% if is_addDistrict %}active{% endif %}" href="{% url 'official:addDistrict' %}">ADD District</a></li>
           <li><a class="nav-link scrollto {% if is_addBranch %}active{% endif %}" href="{% url 'official:addBranch' %}">ADD BRANCH</a></li>
           <li><a class="nav-link scrollto {% if is_addDoctor %}active{% endif %}" href="{% url 'official:addDoctor' %}">ADD DOCTOR</a></li>
           <li><a class="nav-link scrollto {% if is_addSchedule %}active{% endif %}" href="{% url 'official:addSchedule' %}">ADD Schedule</a></li>

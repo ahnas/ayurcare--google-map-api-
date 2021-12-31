@@ -43,28 +43,31 @@
         </div>
 
 
-        <div class="col-lg-4 col-md-6 col-sm-12 col-12 position-absolute searc d-none">
-            <h3>Locate the nearest Branch</h3>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12 position-absolute searc ">
+            <h3>Locate the District</h3>
             <div class="input-group">
-                <input type="text" class="form-control form-controll" placeholder="Search District"
+
+                <input id="auto" type="text" class="form-control form-controll" placeholder="Search District"
                     aria-label="Locate us" aria-describedby="basic-addon2">
+
                 <div class="input-group-append">
                     <span class="input-group-text input-group-textt"
                         style="background-color:#feda77; border-color: #feda77;" id="basic-addon2"><span
-                            class="iconify input-group-textt" data-icon="fluent:location-28-filled"></span></span>
+                            class="iconify input-group-textt" data-icon="fluent:search-28-filled"></span></span>
                 </div>
             </div>
 
 
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 col-12 position-absolute searcc branch ">
-            <h4 >Branch Details</h4>
+            <h4>Branch Details</h4>
 
 
             <div class="row pl-5">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-2 p-0"><i class="icofont-building"></i></div>
                 <div class="col-lg-10 col-md-10 col-sm-10 col-10 p-0">
-                    <p id="branchname" style="color: white; text-align: left;"> <span style="font-weight: 500;">Maliyekkal
+                    <p id="branchname" style="color: white; text-align: left;"> <span
+                            style="font-weight: 500;">Maliyekkal
                             Medicals,</span> <br>Kondotty,<br>Kerala - 673 678</p>
                 </div>
             </div>
@@ -82,12 +85,11 @@
                                 href="tel:+919846272655">(+91) 9846 272 655</a> </span>
                 </div>
             </div>
-          
+            <p id=""></p>
 
-            
+            <a id="brannid"> <button style="background-color: #FEDA77 !important;" class="read check appoii mt-1">Book
+                    Appoinment</button> </a>
 
-            <button style="background-color: #FEDA77 !important;" class="read check appoii mt-1">Book
-                Appoinment</button>
 
 
 
@@ -96,6 +98,9 @@
 
     </div>
 </div>
+
+
+
 
 <div class="container-fluid care">
     <div class="row">
@@ -121,81 +126,165 @@
 {% block javascript %}
 
 
+<script src="https://code.jquery.com/jquery-1.12.4.js">
+</script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js">
+</script>
+
+
 <script type="text/javascript">
-    $.ajax({
-        url: "/branchmark/",
-        type: "GET",
-        success: function (response) {
-            data = [response]
-            var locations = [
-
-            ];
-            $.each(response, function (i, item) {
-                locations.push([item.name, item.latitude, item.longitude, item.id,item.phone,item.location])
 
 
-            });
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 10,
+    $(document).ready(function () {
 
-                center: new google.maps.LatLng(11.248, 75.7804),
-                
-                // center: new google.maps.LatLng(-33.92, 151.25),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            });
+        loadmap('11.2697233','76.2467868',7)
+        var itemsID = [
+        ];
+        var items = [
+        ];
+        
+        $.ajax({
+            url: "/districtsr/",
+            type: "GET",
+            success: function (response) {
+                data = [response]
 
-            var infowindow = new google.maps.InfoWindow();
-
-            var marker, i;
-
-            for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    map: map
+                $.each(response, function (i, item) {
+                    items.push(item.name)
+                    itemsID.push([item.id,item.name,item.latitude,item.longitude])
+                    
                 });
+                console.log(itemsID)
+                
 
-                google.maps.event.addListener(marker, 'click', (function (marker, i) {
-
-                    return function () {
-                        infowindow.setContent(locations[i][3] + branchclk(locations[i][3]));
-                        infowindow.open(map, marker);
-                    }
-                })(marker, i));
-
-
-                function branchclk(ids) {
-                    
-                    var datas = locations.find(x => x[3] === ids);
-                    
-                    $('#branchname').html(datas[0])
-                    $('#branchphone').html(datas[4])
-                    $('#branchlocation').html(datas[5])
-                    $('.branch').show();
-
-
-
-                }
-
-                $(document).mouseup(function (e) {
-                    var container = $(".branch");
-                    // if the target of the click isn't the container nor a descendant of the container
-                    if (!container.is(e.target) && container.has(e.target).length === 0) {
-                        container.hide();
-                    }
+                $("#auto").autocomplete({
+                    source: items 
                 });
             }
-        }
+
+        })
+
+        $("#auto").keyup(function () {
+            if ($.inArray($("#auto").val(), items) != -1) {
+                var lat=''
+                var log=''
+                $.each(itemsID, function (i, item) {
+                    
+                   if(item[1]==$("#auto").val()){
+                    lat=item[2]
+                    log=item[3]
+                   }
+                   
+               });
+                loadmap(lat,log,9)
+            }
+        })
+
+
 
     })
+</script>
 
+<!-- <script>
+    $(document).ready(function () {
+        // array of items.
+        var items = [
+            
+        ];
+        // jQuery inbuild function
+        $("#auto").autocomplete({
+            source: items // list of items.
+        });
+    })
+</script> -->
+
+
+
+<script type="text/javascript">
+    function loadmap(lat,log,zoom) {
+        
+        $.ajax({
+            url: "/branchmark/",
+            type: "GET",
+            success: function (response) {
+                data = [response]
+                var locations = [
+
+                ];
+                $.each(response, function (i, item) {
+                    locations.push([item.name, item.latitude, item.longitude, item.id, item.phone, item.location])
+
+
+                });
+
+                
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: zoom,
+
+                    center: new google.maps.LatLng(lat, log),
+
+                    // center: new google.maps.LatLng(-33.92, 151.25),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+
+                var infowindow = new google.maps.InfoWindow();
+
+                var marker, i;
+
+                for (i = 0; i < locations.length; i++) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                        map: map
+                    });
+
+                    google.maps.event.addListener(marker, 'click', (function (marker, i) {
+
+                        return function () {
+                            infowindow.setContent(locations[i][3] + branchclk(locations[i][3]));
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+
+
+                    function branchclk(ids) {
+
+                        var datas = locations.find(x => x[3] === ids);
+
+                        $('#branchname').html(datas[0])
+                        $('#branchphone').html(datas[4])
+                        $('#branchlocation').html(datas[5])
+
+                        $("#brannid").click(function () {
+                            location.href = '/branchbook/' + ids + '/'
+
+                        })
+
+                        $('.branch').show();
+
+
+                    }
+
+                    $(document).mouseup(function (e) {
+                        var container = $(".branch");
+                        // if the target of the click isn't the container nor a descendant of the container
+                        if (!container.is(e.target) && container.has(e.target).length === 0) {
+                            container.hide();
+                        }
+                    });
+                }
+            }
+
+        })
+    }
 </script>
 
 <script>
     $('.branch').hide();
 </script>
 
-<script>
 
 
-</script>
+
+
+
 {% endblock %}

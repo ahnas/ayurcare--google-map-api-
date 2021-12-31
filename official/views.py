@@ -4,13 +4,19 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import json
-from official.forms import BranchForm,DoctorForm,ScheduleForm
-from .models import Branch 
+from official.forms import BranchForm,DoctorForm,ScheduleForm,DistrictMapForm
+from .models import Branch, DistrictMap 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
 from django.contrib import messages 
 from django.contrib import auth
+
+
+def delet(request,id):
+    object = DistrictMap.objects.get(id=id)
+    object.delete()
+    return redirect("/official/")
 
 
 def log_in(request):
@@ -20,7 +26,7 @@ def log_in(request):
         user=authenticate(username=username, password=password)     
         if user is not None:
             login(request, user)
-            return redirect("/official/addBranch/")
+            return redirect("/official/")
         else:   
             messages.error(request, "Invalid Details") 
     else:
@@ -31,6 +37,36 @@ def log_in(request):
 def logout(request):
     auth.logout(request)
     return redirect('official:log_in')
+
+
+@login_required(login_url='official:log_in')
+def addDistrict(request):
+    districtlist = DistrictMap.objects.all()
+    districtform = DistrictMapForm(request.POST or None)
+    if request.method == 'POST':
+        if districtform.is_valid():
+           districtform.save()          
+           response_data = {
+                "status" : "true",
+                "title" : "Successfully Submitted",
+                "message" : "District Added"
+            }
+        else:
+            response_data = {
+                "status" : "false",
+                "title" : "Form validation error",
+            }
+        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+    else:
+        context = {
+                "is_addDistrict" : True,
+                "districtform":districtform,
+                "districtlist":districtlist,
+            }
+   
+    
+    return render(request, 'official/addDistrict.html',context)
+
 
 @login_required(login_url='official:log_in')
 def addBranch(request):
@@ -44,7 +80,6 @@ def addBranch(request):
                 "message" : "Branch Added"
             }
         else:
-            print (branchform.errors)
             response_data = {
                 "status" : "false",
                 "title" : "Form validation error",

@@ -94,9 +94,8 @@
         font-family: 'Marcellus', serif !important;
     }
     .searc {
-        left: 125px;
-        top: 268px;
-        padding: 45px 0px;
+        
+        padding: 30px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
     }
@@ -204,12 +203,11 @@
         text-align: -webkit-center;
     }
     .branchh {
-        margin-bottom: 40%;
+        margin-bottom: 20%;
     }
     .searc {
-        left: unset;
-        top: 750px;
-        padding: 55px 0px;
+        
+        padding: 30px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
     }
@@ -597,6 +595,12 @@
 }
 
 @media only screen and (max-width:768px) {
+    .posit-absl {
+        position: fixed;
+        z-index: 1000;
+        top: 33%;
+        left: 0%;
+    }
     .searc h3 {
         font-size: 20px;
         color: white;
@@ -610,18 +614,18 @@
     }
     .searcc {
         right: 1px;
-        top: 690px;
+        top: 375px;
         padding: 35px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
+        z-index: 100;
     }
     .branchh {
-        margin-bottom: 40%;
+        margin-bottom: 88px;
     }
     .searc {
-        left: unset;
-        top: 750px;
-        padding: 55px 0px;
+        
+        padding: 30px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
     }
@@ -1063,18 +1067,20 @@
     }
     .searcc {
         right: unset;
-        top: 835px;
+        left: 130px;
+        top: 415px;
         padding: 35px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
+        width: 55%;
+        z-index: 100;
     }
     .branchh {
-        margin-bottom: 77%;
+        margin-bottom: 20%;
     }
     .searc {
-        left: unset;
-        top: 650px;
-        padding: 55px 0px;
+        
+        padding: 30px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
     }
@@ -1463,18 +1469,18 @@
     }
     .searcc {
         right: unset;
-        top: 815px;
+        top: 390px;
+        left: 95px;
         padding: 35px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
     }
     .branchh {
-        margin-bottom: 102%;
+        
     }
     .searc {
-        left: unset;
-        top: 640px;
-        padding: 55px 0px;
+        
+        padding: 30px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
     }
@@ -1857,18 +1863,17 @@
     }
     .searcc {
         right: unset;
-        top: 815px;
+        
         padding: 35px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
     }
     .branchh {
-        margin-bottom: 102%;
+        margin-bottom: 30%;
     }
     .searc {
-        left: unset;
-        top: 640px;
-        padding: 55px 0px;
+        
+        padding: 30px 0px;
         background: rgb(0 0 0 / 65%);
         text-align: -webkit-center;
     }
