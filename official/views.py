@@ -43,20 +43,36 @@ def logout(request):
 def addDistrict(request):
     districtlist = DistrictMap.objects.all()
     districtform = DistrictMapForm(request.POST or None)
+
     if request.method == 'POST':
-        if districtform.is_valid():
-           districtform.save()          
-           response_data = {
-                "status" : "true",
-                "title" : "Successfully Submitted",
-                "message" : "District Added"
-            }
-        else:
+        if request.POST.get('id') != '0':
+            editDistrictMap = DistrictMap.objects.get(id =request.POST.get('id'))
+            editDistrictMap.name = request.POST.get('name')
+            editDistrictMap.latitude = request.POST.get('latitude')
+            editDistrictMap.longitude = request.POST.get('longitude')
+            editDistrictMap.save()
             response_data = {
-                "status" : "false",
-                "title" : "Form validation error",
-            }
-        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+                        "status" : "true",
+                        "title" : "Successfully Submitted",
+                        "message" : "District Edited"
+                    }
+            return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+
+        else:
+                
+            if districtform.is_valid():
+                districtform.save()          
+                response_data = {
+                        "status" : "true",
+                        "title" : "Successfully Submitted",
+                        "message" : "District Added"
+                    }
+            else:
+                response_data = {
+                    "status" : "false",
+                    "title" : "Form validation error",
+                }
+            return HttpResponse(json.dumps(response_data), content_type='application/javascript')
     else:
         context = {
                 "is_addDistrict" : True,

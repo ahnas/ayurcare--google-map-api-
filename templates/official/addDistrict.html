@@ -29,8 +29,8 @@
           <td>{{districtlist.longitude}}</td>
           <td>
             <div class="acti" id="{{districtlist.id}}">
-              <i class="bi bi-pencil-square"></i>
-              <i onclick="delet('{{districtlist.id}}')" class="bi bi-trash ms-3 ng-red"></i>
+              <a href="#contact"><i onclick="editt('{{districtlist.id}}',this)" class="bi bi-pencil-square"></i></a>
+             <a> <i onclick="delet('{{districtlist.id}}')" class="bi bi-trash ms-3 ng-red"></i> </a>
             </div>
 
           </td>
@@ -62,7 +62,7 @@
       <div class="col-xl-9 col-lg-12 mt-4">
         <form action="" method="POST" class="ajax reload">
           {% csrf_token %}
-
+          <input type="hidden"  value="0" id="disID" name="id"> 
           <div class="row mt-3">
             <div class="col-md-12 form-group">
 
@@ -123,7 +123,7 @@
   function delet(ids) {
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this technician!",
+      text: "Once deleted, you will not be able to recover this Data!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -142,6 +142,21 @@
           swal("Your imaginary file is safe!");
         }
       });
+  }
+
+  function editt(id,thisProp) {
+    var name = $(thisProp).closest('tr').find("td:eq(0)").html();
+    var latitude = $(thisProp).closest('tr').find("td:eq(1)").html();
+    var longitude = $(thisProp).closest('tr').find("td:eq(2)").html();
+    
+
+    $('#name').val(name)
+    $('#latitude').val(latitude)
+    $('#longitude').val(longitude)
+    $('#disID').val(id)
+    
+
+    
   }
 
 

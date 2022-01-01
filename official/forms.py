@@ -13,9 +13,9 @@ class DistrictMapForm(forms.ModelForm):
         model = DistrictMap
         fields = '__all__'
         widgets = {
-            'name': TextInput(attrs={'class': 'form-control', 'placeholder': 'District Name',}),
-            'latitude': TextInput(attrs={'class': 'form-control lat', 'placeholder': 'District latitude'}),
-            'longitude': TextInput(attrs={'class': 'form-control lon', 'placeholder': 'District longitude'}),
+            'name': TextInput(attrs={'class': 'form-control', 'placeholder': 'District Name','id':'name','name':'name'}),
+            'latitude': TextInput(attrs={'class': 'form-control lat', 'placeholder': 'District latitude','id':'latitude','name':'latitude'}),
+            'longitude': TextInput(attrs={'class': 'form-control lon', 'placeholder': 'District longitude','id':'longitude','name':'longitude'}),
         }
 
 class BranchForm(forms.ModelForm):
