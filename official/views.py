@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import json
 from official.forms import BranchForm,DoctorForm,ScheduleForm,DistrictMapForm
-from .models import Branch, DistrictMap 
+from .models import Branch, DistrictMap, Doctor 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
@@ -13,10 +13,6 @@ from django.contrib import messages
 from django.contrib import auth
 
 
-def delet(request,id):
-    object = DistrictMap.objects.get(id=id)
-    object.delete()
-    return redirect("/official/")
 
 
 def log_in(request):
@@ -52,19 +48,17 @@ def addDistrict(request):
             editDistrictMap.longitude = request.POST.get('longitude')
             editDistrictMap.save()
             response_data = {
-                        "status" : "true",
-                        "title" : "Successfully Submitted",
+                        "status" : "true",                 
                         "message" : "District Edited"
                     }
             return HttpResponse(json.dumps(response_data), content_type='application/javascript')
 
-        else:
-                
+        else: 
             if districtform.is_valid():
                 districtform.save()          
                 response_data = {
                         "status" : "true",
-                        "title" : "Successfully Submitted",
+                        "title" : "Successfully Added",
                         "message" : "District Added"
                     }
             else:
@@ -78,53 +72,89 @@ def addDistrict(request):
                 "is_addDistrict" : True,
                 "districtform":districtform,
                 "districtlist":districtlist,
-            }
-   
-    
+        }
     return render(request, 'official/addDistrict.html',context)
 
 
 @login_required(login_url='official:log_in')
 def addBranch(request):
+    branchlist = Branch.objects.all()
     branchform = BranchForm(request.POST or None)
+
     if request.method == 'POST':
-        if branchform.is_valid():
-           branchform.save()          
-           response_data = {
-                "status" : "true",
-                "title" : "Successfully Submitted",
-                "message" : "Branch Added"
-            }
-        else:
+        if request.POST.get('id') != '0':
+            editBranch = Branch.objects.get(id =request.POST.get('id'))
+            editBranch.name = request.POST.get('name')
+            editBranch.title = request.POST.get('title')
+            editBranch.phone = request.POST.get('phone')
+            editBranch.location = request.POST.get('location')
+            editBranch.latitude = request.POST.get('latitude')
+            editBranch.longitude = request.POST.get('longitude')
+            editBranch.save()
             response_data = {
-                "status" : "false",
-                "title" : "Form validation error",
-            }
-        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+                        "status" : "true",
+                        "message" : "Branch Edited"
+                    }
+            return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+        else:
+            if branchform.is_valid():
+                branchform.save()          
+                response_data = {
+                        "status" : "true",
+                        "title" : "Successfully Added",
+                        "message" : "Branch Added"
+                    }
+            else:
+                response_data = {
+                    "status" : "false",
+                    "title" : "Form validation error",
+                }
+            return HttpResponse(json.dumps(response_data), content_type='application/javascript')
     else:
         context = {
             "is_addBranch" : True,
             "branchform":branchform,
+            "branchlist":branchlist,
         }
     return render(request, 'official/addBranch.html',context)
 
 
 @login_required(login_url='official:log_in')
 def addDoctor(request):
+    doctorlist = Doctor.objects.all()
     doctorform = DoctorForm(request.POST,request.FILES)
+
     if request.method == 'POST':
-        if doctorform.is_valid():
-           doctorform.save()          
-        response_data = {
-            "status" : "true",
-            "title" : "Successfully Submitted",
-            "message" : "Doctor Added"
-        }
-        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+        if request.POST.get('id') != '0':
+            editDoctor = Doctor.objects.get(id =request.POST.get('id'))
+            editDoctor.register_number = request.POST.get('register-number')
+            editDoctor.image = request.POST.get('image')
+            editDoctor.qualification = request.POST.get('qualification')
+            editDoctor.save()
+            response_data = {
+                        "status" : "true",                 
+                        "message" : "Doctor Edited"
+                    }
+            return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+        else:
+
+            if doctorform.is_valid():
+                doctorform.save()          
+                response_data = {
+                    "status" : "true",
+                    "title" : "Successfully Added",
+                    "message" : "Doctor Added"
+                }
+            else:
+                response_data = {
+                    "status" : "false",
+                }
+            return HttpResponse(json.dumps(response_data), content_type='application/javascript')
     else:
         context = {
             "is_addDoctor" : True,
             "doctorform":doctorform,
+            "doctorlist":doctorlist,
         }
     return render(request, 'official/addDoctor.html',context)
 
@@ -138,7 +168,7 @@ def addSchedule(request):
            scheduleform.save()          
            response_data = {
                 "status" : "true",
-                "title" : "Successfully Submitted",
+                "title" : "Successfully Added",
                 "message" : "Schedule Added"
             }
         else:
@@ -155,3 +185,20 @@ def addSchedule(request):
         }
     
     return render(request, 'official/addSchedule.html',context)
+
+
+def delet(request,id):
+    object = DistrictMap.objects.get(id=id)
+    object.delete()
+    return redirect("/official/") 
+
+def deletbranch(request,id):
+    object = Branch.objects.get(id=id)
+    object.delete()
+    return redirect("/official/addBranch")
+
+def deletdoct(request,id):
+    object = Doctor.objects.get(id=id)
+    object.delete()
+    return redirect("/official/addDoctor")
+

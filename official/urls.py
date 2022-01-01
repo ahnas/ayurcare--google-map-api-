@@ -13,5 +13,7 @@ urlpatterns = [
     path('addSchedule/',addSchedule,name="addSchedule"),
 
     path('delet/<str:id>',delet,name="delet"),
+    path('deletbranch/<str:id>',deletbranch,name="deletbranch"),
+    path('deletdoct/<str:id>',deletdoct,name="deletdoct"),
     
 ]

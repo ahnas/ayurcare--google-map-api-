@@ -51,7 +51,7 @@ body {
 .ayurveda h1 {
     font-family: 'Marcellus', serif;
     font-size: 45px;
-    color: #FEDA77;
+    color: #3f993c;
 }
 
 .ayurveda h2 {
@@ -95,7 +95,7 @@ body {
 }
 
 .about span {
-    color: #FEDA77;
+    color: #3f993c;
 }
 
 .about p {
@@ -118,7 +118,7 @@ body {
 
 .why span {
     font-family: 'Marcellus', serif;
-    color: #FEDA77;
+    color: #3f993c;
 }
 
 .why p {
@@ -192,7 +192,7 @@ hr {
     border: none;
     height: 2px;
     color: #333;
-    background-color: #FEDA77;
+    background-color: #3f993c;
 }
 
 .care .locate {
@@ -214,8 +214,8 @@ hr {
 
 .locate span {
     color: black;
-    background-color: #FEDA77;
-    border-color: #FEDA77;
+    background-color: #3f993c;
+    border-color: #3f993c;
     font-weight: 600;
     padding: 0px 35px;
 }
@@ -244,7 +244,7 @@ h4 {
 
 .locates .ayt {
     background-color: transparent;
-    color: #FEDA77;
+    color: #3f993c;
     padding: 0 !important;
 }
 
@@ -254,11 +254,11 @@ footer {
 
 .form-controll {
     height: 42px;
-    border-color: #FEDA77;
+    border-color: #3f993c;
 }
 
 .input-group-appendd {
-    background-color: #FEDA77;
+    background-color: #3f993c;
     border: none;
 }
 
@@ -283,7 +283,7 @@ footer {
 .use ul span {
     font-size: 20px;
     font-weight: 900;
-    color: #FEDA77;
+    color: #3f993c;
 }
 
 .use a {
@@ -295,7 +295,7 @@ footer {
 }
 
 .cont {
-    color: #FEDA77;
+    color: #3f993c;
     font-size: 20px;
 }
 
@@ -317,7 +317,7 @@ footer {
 }
 
 .navigationn-ul .active {
-    color: #FEDA77 !important;
+    color: #3f993c !important;
     font-weight: 600;
 }
 
@@ -418,15 +418,15 @@ p {
 
 .contact .form-control {
     border: none;
-    border-bottom: 1px solid #FEDA77;
+    border-bottom: 1px solid #3f993c;
     border-radius: 0px;
     height: 50px;
 }
 
 .btn-primaryy {
     color: rgb(0, 0, 0);
-    background-color: #FEDA77;
-    border-color: #FEDA77;
+    background-color: #3f993c;
+    border-color: #3f993c;
     font-size: 18px;
     font-weight: 600;
     padding: 10px 24px;
@@ -448,7 +448,7 @@ p {
 }
 
 .touch h4 {
-    color: #FEDA77;
+    color: #3f993c;
     font-weight: 600;
 }
 
@@ -491,7 +491,7 @@ p {
 }
 
 .appointment i {
-    color: #FEDA77;
+    color: #3f993c;
     font-size: 23px;
     line-height: 25px;
 }
@@ -500,6 +500,7 @@ p {
     padding: 9px 25px;
     font-size: 18px;
     font-weight: 500;
+    border-radius: 5px;
 }
 
 .appointment {
@@ -542,13 +543,13 @@ p {
 
 .searcc h4 {
     text-decoration-line: UNDERLINE;
-    text-decoration-color: #FEDA77;
+    text-decoration-color: #3f993c;
     color: white;
     font-family: 'Marcellus', serif !important;
 }
 
 .branch i {
-    color: #FEDA77;
+    color: #3f993c;
     font-size: 22px;
 }
 
@@ -562,7 +563,7 @@ p {
     padding: 14px 28px;
     font-size: 20px;
     font-weight: 500;
-    background-color: #FEDA77;
+    background-color: #3f993c;
     font-weight: 600;
 }
 
@@ -671,4 +672,63 @@ p {
 .ui-widget-content li{
     list-style: none;
     padding: 5px 0px;
+}
+
+.bookcre p{
+    color: black;
+    font-size: 15px;
+    
+    
+}
+
+.bookcre span{
+   
+    font-weight: 600;
+}
+
+.img-borrd img{
+    border-radius: 50%;
+    border: 2px solid #3f993c;
+}
+
+
+.fon-we-600{
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+
+.place-self-center{
+    
+    place-self: center;
+}
+
+.box-shadow-19{
+    box-shadow: 5px 5px 18px rgb(0 0 0 / 16%);
+    padding: 15px;
+    height: 100%;
+    border-radius: 15px;
+    background: #fff9f7;
+
+}
+.img-borrd h6 {
+    margin-bottom: 3px;
+}
+.box-sh{
+    box-shadow: 5px 5px 18px rgb(0 0 0 / 16%);
+    padding: 20px 0px;
+    border-radius: 15px;
+}
+
+.colr-bg input{
+    color: white;
+}
+.p-what{
+    color: black;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.p-what span{
+    font-weight: 600;
 }

@@ -23,12 +23,12 @@ class BranchForm(forms.ModelForm):
         model = Branch
         fields = '__all__'
         widgets = {
-            'name': TextInput(attrs={'class': 'form-control', 'placeholder': 'Branch Name',}),
-            'title': TextInput(attrs={'class': 'form-control ', 'placeholder': 'Branch Title'}),
-            'location': TextInput(attrs={'class': 'form-control', 'placeholder': 'Branch Location'}),
-            'phone': TextInput(attrs={'class': 'form-control', 'placeholder': 'Branch Phone'}),
-            'latitude': TextInput(attrs={'class': 'form-control lat', 'placeholder': 'Branch latitude'}),
-            'longitude': TextInput(attrs={'class': 'form-control lon', 'placeholder': 'Branch longitude'}),
+            'name': TextInput(attrs={'class': 'form-control', 'placeholder': 'Branch Name','id':'name','name':'name'}),
+            'title': TextInput(attrs={'class': 'form-control ', 'placeholder': 'Branch Title','id':'title','name':'title'}),
+            'phone': TextInput(attrs={'class': 'form-control', 'placeholder': 'Branch Phone','id':'phone','name':'phone'}),
+            'location': TextInput(attrs={'class': 'form-control', 'placeholder': 'Branch Location','id':'location','name':'location'}),
+            'latitude': TextInput(attrs={'class': 'form-control lat', 'placeholder': 'Branch latitude','id':'latitude','name':'latitude'}),
+            'longitude': TextInput(attrs={'class': 'form-control lon', 'placeholder': 'Branch longitude','id':'longitude','name':'longitude'}),
         }
 
 class DoctorForm(forms.ModelForm):
@@ -36,10 +36,10 @@ class DoctorForm(forms.ModelForm):
         model = Doctor
         fields = '__all__'
         widgets = {
-            'register_number': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Register Number',}),
-            'name': TextInput(attrs={'class': 'form-control ', 'placeholder': 'Name'}),
-            'image': FileInput(attrs={'class': 'form-control', 'placeholder': 'image'}),
-            'qualification': TextInput(attrs={'class': 'form-control lat', 'placeholder': 'Qualification'}),
+            'register_number': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Register Number','id':'registernumber','name':'registernumber'}),
+            'name': TextInput(attrs={'class': 'form-control ', 'placeholder': 'Name','id':'name','name':'name'}),
+            'image': FileInput(attrs={'class': 'form-control', 'placeholder': 'image','id':'image','name':'image'}),
+            'qualification': TextInput(attrs={'class': 'form-control lat', 'placeholder': 'Designation','id':'qualification','name':'qualification'}),
             
         }
 

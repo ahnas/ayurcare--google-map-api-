@@ -31,7 +31,7 @@ def contact(request):
             form.save()
             response_data = {
                 "status" : "true",
-                "title" : "Successfully Submitted",
+                "title" : "Sent Successfully",
                 "message" : "Message successfully updated"
             }
         else:
@@ -103,6 +103,8 @@ def branchbook(request,id):
     branch = get_object_or_404(Branch,id=id)
     schedules = Schedule.objects.filter(branch = branch)
     whatsappbtn = ''
+    brname = ''
+    brnumber = ''
     if request.POST:
         scheduleID = request.POST['scheduleID']
         brname = request.POST['brname']
@@ -131,6 +133,8 @@ def branchbook(request,id):
         "branch":branch,
         "schedules":schedules,   
         "whatsappbtn":whatsappbtn,
+        "brname":brname,
+        "brnumber":brnumber,
     }
     return render(request, 'web/branchbook.html',context)
 
@@ -154,6 +158,9 @@ def book(request,id):
         "is_book" : True,
         "schedule":schedule,
         "whatsappbtn":whatsappbtn,
+        "ptname":ptname,
+        "ptnumber":ptnumber,
+
         }
         
         return render(request, 'web/book.html',context)

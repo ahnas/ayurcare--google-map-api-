@@ -32,7 +32,7 @@
 
             </div>
             <div class="col-lg-4 col-4 text-center">
-                <h2 style="font-weight: 800;">LOGO</h2>
+                <img height="60px" src="{% static 'web/images/ayucare.svg' %}" alt="">
             </div>
             <div class="col-lg-4 col-4 dd-none text-center">
                 <a href="mailto:info@ayucare.com" class="mr-3">info@ayucare.com</a>
@@ -60,10 +60,8 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-lg-1 col-1 search">
-                <a href="#"><span class="iconify" data-icon="bi:search"></span> </a>
-            </div>
-            <div class="col-lg-2 locate">
+            
+            <div class="col-lg-3 locate">
                 <a href="{% url 'web:branch' %}" class="branch float-right">LOCATE BRANCH</a>
             </div>
             <div class="toggle-button d-inline-block d-lg-none"><a href="#" style="color: black;" class="site-menu-toggle py-5 js-menu-toggle text-black"><span class="iconify text-black" data-icon="gg:menu"></span></a>

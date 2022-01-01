@@ -8,7 +8,7 @@
 
 
 <div class="container">
-  <h3 style="color: #ff5821;" class="text-center">List <span class="adnew"><a href="#contact"><i class="bi bi-plus-circle mr-2"></i>Add New</a></span> </h3>
+  <h3 style="color: #3f993c;" class="text-center">List <span onclick="formclr()" class="adnew"><a href="#contact"><i class="bi bi-plus-circle mr-2"></i>Add New</a></span> </h3>
   <div class="row">
 
 
@@ -54,13 +54,12 @@
 <section id="contact" class="contact">
   <div class="container">
 
-
-    <h3 class="text-center">Add District</h3>
+    <h3 id="titedit" class="text-center">Add District</h3>
 
 
     <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="300">
       <div class="col-xl-9 col-lg-12 mt-4">
-        <form action="" method="POST" class="ajax reload">
+        <form action="" method="POST" class="ajax reload" id="resform">
           {% csrf_token %}
           <input type="hidden"  value="0" id="disID" name="id"> 
           <div class="row mt-3">
@@ -73,7 +72,7 @@
 
 
           <div class="form-group mt-3  text-center">
-            <button type="button" class="btn btn-primary" id="btn-geolocation">Find current location</button>
+            <button type="button" class="btn btn-primar" id="btn-geolocation">Find current location</button>
           </div>
 
           <br>
@@ -120,6 +119,11 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 
+  function formclr() {
+    $("#titedit").html("Add District");
+    $("#resform").trigger("reset")
+  }
+
   function delet(ids) {
     swal({
       title: "Are you sure?",
@@ -145,6 +149,7 @@
   }
 
   function editt(id,thisProp) {
+    $("#titedit").html("Edit District"+ "<span onclick='formclr()' class='adnew'><a href='#contact'><i class='bi bi-plus-circle mr-2'></i>Add New</a></span>");
     var name = $(thisProp).closest('tr').find("td:eq(0)").html();
     var latitude = $(thisProp).closest('tr').find("td:eq(1)").html();
     var longitude = $(thisProp).closest('tr').find("td:eq(2)").html();
