@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import json
 from official.forms import BranchForm,DoctorForm,ScheduleForm,DistrictMapForm
-from .models import Branch, DistrictMap, Doctor 
+from .models import Branch, DistrictMap, Doctor, Schedule 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
@@ -116,6 +116,7 @@ def addBranch(request):
             "branchform":branchform,
             "branchlist":branchlist,
         }
+
     return render(request, 'official/addBranch.html',context)
 
 
@@ -164,26 +165,42 @@ def addDoctor(request):
 
 @login_required(login_url='official:log_in')
 def addSchedule(request):
+    schedulelist = Schedule.objects.all()
     scheduleform = ScheduleForm(request.POST or None)
+
     if request.method == 'POST':
-        if scheduleform.is_valid():
-           scheduleform.save()          
-           response_data = {
-                "status" : "true",
-                "title" : "Successfully Added",
-                "message" : "Schedule Added"
-            }
-        else:
-            
+        if request.POST.get('id') != '0':
+            editSchedule = Schedule.objects.get(id =request.POST.get('id'))
+            editSchedule.treatment = request.POST.get('treatment')
+            editSchedule.branch.id = int(request.POST.get('branch'))
+            editSchedule.doctor.id = int(request.POST.get('doctor'))
+            editSchedule.start_time = request.POST.get('start_time')
+            editSchedule.end_time = request.POST.get('end_time')
+            editSchedule.save()
             response_data = {
-                "status" : "false",
-                "title" : "Form validation error",
-            }
-        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+                        "status" : "true",
+                        "message" : "Schedule Edited"
+                    }
+            return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+        else:
+            if scheduleform.is_valid():
+                scheduleform.save()          
+                response_data = {
+                        "status" : "true",
+                        "title" : "Successfully Added",
+                        "message" : "Schedule Added"
+                    }
+            else:
+                response_data = {
+                    "status" : "false",
+                    "title" : "Form validation error",
+                }
+            return HttpResponse(json.dumps(response_data), content_type='application/javascript')
     else:
         context = {
             "is_addSchedule" : True,
             "scheduleform":scheduleform,
+            "schedulelist":schedulelist,
         }
     
     return render(request, 'official/addSchedule.html',context)
@@ -201,6 +218,12 @@ def deletbranch(request,id):
 
 def deletdoct(request,id):
     object = Doctor.objects.get(id=id)
+    object.delete()
+    return redirect("/official/addDoctor")
+
+
+def deletsched(request,id):
+    object = Schedule.objects.get(id=id)
     object.delete()
     return redirect("/official/addDoctor")
 

@@ -49,12 +49,11 @@ class ScheduleForm(forms.ModelForm):
         model = Schedule
         fields = '__all__'
         widgets = {
-            'treatment': TextInput(attrs={'class': 'form-control', 'placeholder': 'treatment',}),
-            'branch': Select(attrs={'class': 'form-control ','id':'branid'}),
-            'doctor': Select(attrs={'class': 'form-control','id':'doctid',}),
-            'slug': TextInput(attrs={'class': 'form-control','id':'slugid',}),
-            'start_time': TimeInput(attrs={'class': 'form-control','type':'time',}),
-            'end_time': TimeInput(attrs={'class': 'form-control','type':'time'}),
+            'treatment': TextInput(attrs={'class': 'form-control', 'placeholder': 'treatment','id':'treatment','name':'treatment'}),
+            'branch': Select(attrs={'class': 'form-control ','id':'branid','name':'branch'}),
+            'doctor': Select(attrs={'class': 'form-control','id':'doctid','name':'doctor'}),
+            'start_time': TimeInput(attrs={'class': 'form-control','type':'time','id':'starttime','name':'starttime'}),
+            'end_time': TimeInput(attrs={'class': 'form-control','type':'time','id':'endtime','name':'endtime'}),
 
         }
 
