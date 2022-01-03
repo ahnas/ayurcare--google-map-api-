@@ -36,7 +36,7 @@ class DoctorForm(forms.ModelForm):
         model = Doctor
         fields = '__all__'
         widgets = {
-            'register_number': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Register Number','id':'registernumber','name':'registernumber'}),
+            'register_number': NumberInput(attrs={'class': 'form-control', 'placeholder': 'Register Number','id':'registernumber','name':'register_number'}),
             'name': TextInput(attrs={'class': 'form-control ', 'placeholder': 'Name','id':'name','name':'name'}),
             'image': FileInput(attrs={'class': 'form-control', 'placeholder': 'image','id':'image','name':'image'}),
             'qualification': TextInput(attrs={'class': 'form-control lat', 'placeholder': 'Designation','id':'qualification','name':'qualification'}),

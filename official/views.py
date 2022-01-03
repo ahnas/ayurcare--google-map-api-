@@ -127,8 +127,10 @@ def addDoctor(request):
     if request.method == 'POST':
         if request.POST.get('id') != '0':
             editDoctor = Doctor.objects.get(id =request.POST.get('id'))
-            editDoctor.register_number = request.POST.get('register-number')
-            editDoctor.image = request.POST.get('image')
+            editDoctor.register_number = request.POST.get('register_number')
+            editDoctor.name = request.POST.get('name')
+            if request.FILES.get('image'):
+                editDoctor.image = request.FILES.get('image')
             editDoctor.qualification = request.POST.get('qualification')
             editDoctor.save()
             response_data = {

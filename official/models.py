@@ -29,7 +29,7 @@ class Branch(models.Model):
 class Doctor(models.Model):
     register_number =models.IntegerField(unique=True)
     name = models.CharField(max_length=128)
-    image = VersatileImageField(upload_to ='doctors')
+    image = VersatileImageField(upload_to ='doctors',blank=True,null=True)
     qualification = models.CharField(max_length=128)
     
     def __str__(self):

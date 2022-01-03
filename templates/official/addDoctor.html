@@ -60,6 +60,9 @@
   </div>
 </div>
 
+
+  
+
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">
     <div class="container">
@@ -83,6 +86,7 @@
               </div>
             </div>
             <div class="form-group mt-3">
+             <p  id="curr" class="mb-0 ml-3 ">Currently : <span id="img-dott">Photo</span></p> 
               {{doctorform.image}}
             </div>
             <div class="form-group mt-3">
@@ -91,7 +95,7 @@
 
             
 
-        
+            
            
            
             <div class="my-3">
@@ -119,8 +123,24 @@
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
 
 <script>
+  
+    
+  
   $(document).ready(function () {
     $('#example').DataTable();
+    $("#curr").hide()
+
+
+    $("#image").change(function () {
+        if (this.files && this.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#img-dott').html('<img width="40px" height="40px" src="'+ e.target.result+'" alt="">');   
+            }
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
   });
 </script>
 
@@ -131,6 +151,8 @@
   function formclr() {
     $("#titedit").html("Add Doctor");
     $("#resform").trigger("reset")
+    $("#curr").hide()
+    
   }
 
   function deletdoct(ids) {
@@ -159,18 +181,21 @@
 
   function editt(id, thisProp) {
     $("#titedit").html("Edit Doctor" + "<span onclick='formclr()' class='adnew'><a href='#contact'><i class='bi bi-plus-circle mr-2'></i>Add New</a></span>");
-    
+    $("#curr").show()
+
     var registernumber = $(thisProp).closest('tr').find("td:eq(0)").html();
     var name = $(thisProp).closest('tr').find("td:eq(1)").html();
     var qualification = $(thisProp).closest('tr').find("td:eq(3)").html();
     var image = $(thisProp).closest('tr').find("td:eq(2)").html();
-  
+    
+
 
     $('#registernumber').val(registernumber)
     $('#name').val(name)
     $('#qualification').val(qualification)
-    $('#image').val(image)
-   
+    $('#image').attr('value', image).append(image)
+    $('#img-dott').html(image)
+
     $('#disID').val(id)
 
     
