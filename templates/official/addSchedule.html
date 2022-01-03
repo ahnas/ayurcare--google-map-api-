@@ -19,6 +19,7 @@
           <th>treatment</th>
           <th>branch</th>
           <th>doctor</th>
+          <th>day</th>
           <th>start_time</th>
           <th>end_time</th>
           <th>Action</th>
@@ -32,6 +33,7 @@
           <td>{{schedulelist.treatment}}</td>
           <td>{{schedulelist.branch}}</td>
           <td>{{schedulelist.doctor}}</td>
+          <td>{{schedulelist.day}}</td>
           <td>{{schedulelist.start_time}}</td>
           <td>{{schedulelist.end_time}}</td>
           <td hidden>{{schedulelist.branch.id}}</td>
@@ -53,6 +55,7 @@
           <th>treatment</th>
           <th>branch</th>
           <th>doctor</th>
+          <th>day</th>
           <th>start_time</th>
           <th>end_time</th>
           <th>Action</th>
@@ -101,12 +104,19 @@
             <div class="col-md-8 form-group mt-3 mt-md-0">
               <div class="row">
                 <div class="col-12">{{scheduleform.doctor}}</div>
-                <div class="col-6 d-none">{{scheduleform.slug}}</div>
               </div>
-
-
             </div>
           </div>
+
+          <div class="row mb-3 justify-content-center">
+            <div class="col-md-2 form-group place-self-center">
+              <label for="start_time">Day : </label>
+            </div>
+            <div class="col-md-8 form-group mt-3 mt-md-0">
+              {{scheduleform.day}}
+            </div>
+          </div>
+
           <div class="row mb-3 justify-content-center">
             <div class="col-md-2 form-group place-self-center">
               <label for="start_time">start_time : </label>
@@ -212,21 +222,22 @@
     var treatment = $(thisProp).closest('tr').find("td:eq(0)").html();
     var branch = $(thisProp).closest('tr').find("td:eq(1)").html();
     var doctor = $(thisProp).closest('tr').find("td:eq(2)").html();
-    var starttime = $(thisProp).closest('tr').find("td:eq(3)").html();
-    var endtime = $(thisProp).closest('tr').find("td:eq(4)").html();
-    var branchID = $(thisProp).closest('tr').find("td:eq(5)").html();
-    var docID = $(thisProp).closest('tr').find("td:eq(6)").html();
+    var day = $(thisProp).closest('tr').find("td:eq(3)").html();
+    var starttime = $(thisProp).closest('tr').find("td:eq(4)").html();
+    var endtime = $(thisProp).closest('tr').find("td:eq(5)").html();
+   
+    var branchID = $(thisProp).closest('tr').find("td:eq(6)").html();
+    var docID = $(thisProp).closest('tr').find("td:eq(7)").html();
     
 
 
     $('#treatment').val(treatment)
     $('#branid').val(parseInt(branchID))
-
     $('#doctid').val(parseInt(docID))
+    $('#day').val(day)
     $('#starttime').val(starttime)
     $('#endtime').val(endtime)
     
-
     $('#disID').val(id)
 
     

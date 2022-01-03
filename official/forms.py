@@ -52,6 +52,7 @@ class ScheduleForm(forms.ModelForm):
             'treatment': TextInput(attrs={'class': 'form-control', 'placeholder': 'treatment','id':'treatment','name':'treatment'}),
             'branch': Select(attrs={'class': 'form-control ','id':'branid','name':'branch'}),
             'doctor': Select(attrs={'class': 'form-control','id':'doctid','name':'doctor'}),
+            'day': TextInput(attrs={'class': 'form-control', 'placeholder': 'day','id':'day','name':'day'}),
             'start_time': TimeInput(attrs={'class': 'form-control','type':'time','id':'starttime','name':'starttime'}),
             'end_time': TimeInput(attrs={'class': 'form-control','type':'time','id':'endtime','name':'endtime'}),
 

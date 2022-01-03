@@ -105,10 +105,12 @@ def branchbook(request,id):
     whatsappbtn = ''
     brname = ''
     brnumber = ''
+    brday = ''
     if request.POST:
         scheduleID = request.POST['scheduleID']
         brname = request.POST['brname']
         brnumber = request.POST['brnumber']
+        brday = request.POST['brday']
         
         scheduleselect = Schedule.objects.get(id=scheduleID)
 
@@ -117,7 +119,7 @@ def branchbook(request,id):
 
         whatsappbtn = 'https://wa.me/+91'+str(branch.phone)
 
-        messagestring = '?text=Patient Name : '+brname+'%0aPatient Number : '+brnumber+\
+        messagestring = '?text=Patient Name : '+brname+'%0aPatient Number : '+brnumber+'%0aDay : '+brday+\
                 "%0a*-----Booking Details------*"
 
         messagestring += '%0aBranch : '+branch.name+\
@@ -135,6 +137,7 @@ def branchbook(request,id):
         "whatsappbtn":whatsappbtn,
         "brname":brname,
         "brnumber":brnumber,
+        "brday":brday,
     }
     return render(request, 'web/branchbook.html',context)
 
@@ -144,10 +147,11 @@ def book(request,id):
     if request.POST:
         ptname = request.POST['ptname']
         ptnumber = request.POST['ptnumber']
+        ptday = request.POST['ptday']
         start = schedule.start_time.strftime("%I:%M %p")
         end = schedule.end_time.strftime("%I:%M %p")
         whatsappbtn = 'https://wa.me/+91'+str(schedule.branch.phone)
-        messagestring = '?text=Patient Name : '+ptname+'%0aPatient Number : '+ptnumber+\
+        messagestring = '?text=Patient Name : '+ptname+'%0aPatient Number : '+ptnumber+'%0aBooking Day : '+ptday+\
                 "%0a*-----Booking Details------*"
         messagestring += '%0aBranch : '+schedule.branch.name+\
                          '%0aLocation :'+schedule.branch.location+\
@@ -160,7 +164,7 @@ def book(request,id):
         "whatsappbtn":whatsappbtn,
         "ptname":ptname,
         "ptnumber":ptnumber,
-
+        "ptday":ptday
         }
         
         return render(request, 'web/book.html',context)

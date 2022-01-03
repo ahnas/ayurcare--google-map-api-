@@ -81,12 +81,21 @@
                     </div>
                 </div>
                 <div class="row pl-5">
+                    <div class="col-lg-2 col-2 p-0"><i class="icofont-ui-calendar"></i></div>
+                    <div class="col-lg-10 col-10 p-0">
+                        <p style="color: black; text-align: left;"> <span style="font-weight: 600;">
+                                {{schedule.day}}</span> </p>
+                    </div>
+                </div>
+
+                <div class="row pl-5">
                     <div class="col-lg-2 col-2 p-0"><i class="icofont-clock-time"></i></div>
                     <div class="col-lg-10 col-10 p-0">
                         <p style="color: black; text-align: left;"> <span style="font-weight: 600;">
-                                {{schedule.start_time}} to {{schedule.end_time}}</span>
+                                {{schedule.start_time}} to {{schedule.end_time}}</span> </p>
                     </div>
                 </div>
+
                <a href="{% url 'web:book' schedule.id %}"> <button class="read check appoi mt-3">Book Appoinment</button> </a>
 
                <hr style="background: black; height: 1px;">

@@ -37,9 +37,12 @@ class Doctor(models.Model):
 
 
 class Schedule(models.Model):
+
+
     treatment = models.CharField(max_length=100)
     branch = models.ForeignKey(Branch,on_delete = models.CASCADE)
     doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE)
+    day = models.CharField(max_length=100)
     start_time = models.TimeField(max_length=100)
     end_time = models.TimeField(max_length=100)
 

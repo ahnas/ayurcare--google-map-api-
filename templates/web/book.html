@@ -67,6 +67,7 @@
                         <h6 class="fon-we-600">{{schedule.branch.name}}</h6>
                         <h6>{{schedule.branch.location}}</h6>
                         <h6>{{schedule.branch.phone}}</h6>
+                        <h6>({{schedule.day}})</h6>
                         <h6 style="color: black; text-align: left;"> <span style="font-weight: 600;">
                                 {{schedule.start_time}} to {{schedule.end_time}}</span></h6>
                     </div>
@@ -89,6 +90,7 @@
             <p class="p-what fon-we-600">Patient Details :   </p>
             <p class="p-what ml-2">Name :  <span>{{ptname}}</span> </p>
             <p class="p-what ml-2">Number : <span>{{ptnumber}}</span></p>
+            <p class="p-what ml-2">Day : <span>{{ptday}}</span></p>
             <p class="p-what">Thankyou For Using Ayucare !</p>
             <a target="blank" href="{{whatsappbtn}}"> <button style="background: #3f993c;"
                     class="read check appoi mt-3"><i class="icofont-brand-whatsapp mr-3"></i>Confirm Booking</button>
@@ -129,6 +131,8 @@
                 placeholder="Name"> <br>
             <input required style="height: 40px;" class="form-control" type="text" name="ptnumber" id="ptnumber"
                 placeholder="Number"> <br>
+                <input required style="height: 40px;" class="form-control" type="text" name="ptday" id="ptday"
+                placeholder="Day"> <br>
             <button type="submit" class="btn btn-grn">Submit</button>
 
         </form>

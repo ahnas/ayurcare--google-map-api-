@@ -16,17 +16,21 @@ from django.contrib import auth
 
 
 def log_in(request):
-    username = request.POST.get("username")
-    password = request.POST.get("password")
-    if username is not None and password is not None:
-        user=authenticate(username=username, password=password)     
-        if user is not None:
-            login(request, user)
-            return redirect("/official/")
-        else:   
-            messages.error(request, "Invalid Details") 
+    if request.user.is_authenticated:
+        return redirect ('official:addDistrict')
     else:
-        messages.error(request,None) 
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        if username is not None and password is not None:
+            user=authenticate(username=username, password=password)     
+            if user is not None:
+                login(request, user)
+                return redirect("/official/")
+            else:   
+                messages.error(request, "Invalid Details") 
+        else:
+            messages.error(request,None)
+
     return render (request, 'official/login.html')  
 
 
@@ -174,6 +178,7 @@ def addSchedule(request):
             editSchedule.treatment = request.POST.get('treatment')
             editSchedule.branch.id = int(request.POST.get('branch'))
             editSchedule.doctor.id = int(request.POST.get('doctor'))
+            editSchedule.day = request.POST.get('day')
             editSchedule.start_time = request.POST.get('start_time')
             editSchedule.end_time = request.POST.get('end_time')
             editSchedule.save()

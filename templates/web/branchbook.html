@@ -66,6 +66,7 @@
                         <h6 class="fon-we-600">{{branch.name}}</h6>
                         <h6>{{branch.location}}</h6>
                         <h6>{{branch.phone}}</h6>
+                        <h6>({{schedu.day}})</h6>
                         <h6 style="color: black; text-align: left;"> <span style="font-weight: 600;">
                                 {{schedu.start_time}} to {{schedu.end_time}} </span></h6>
                     </div>
@@ -89,6 +90,7 @@
             <p class="p-what fon-we-600">Patient Details :   </p>
             <p class="p-what ml-2">Name :  <span>{{brname}}</span> </p>
             <p class="p-what ml-2">Number : <span>{{brnumber}}</span></p>
+            <p class="p-what ml-2">Day : <span>{{brday}}</span></p>
             <p class="p-what">Thankyou For Using Ayucare !</p>
             <a target="blank" href="{{whatsappbtn}}" > <button style="background: #3f993c;" class="read check appoi mt-0"><i class="icofont-brand-whatsapp mr-3"></i>Confirm Booking</button> </a>
             {% else %}
@@ -112,6 +114,7 @@
             <div onclick="btnclickconn()" id="clo"><span class="closse iconify" data-icon="ant-design:close-circle-outlined"></span></div>
             <input required style="height: 40px;" class="form-control required" type="text" name="brname" id="brname" placeholder="Name"> <br>
             <input required style="height: 40px;" class="form-control required" type="text" name="brnumber" id="brnumber" placeholder="Number"> <br>
+            <input required style="height: 40px;" class="form-control required" type="text" name="brday" id="brday" placeholder="Day"> <br>
             <button type="submit" class="btn btn-danger">Submit</button>
 
             <input type="hidden" name="scheduleID" id="scheduleID">
