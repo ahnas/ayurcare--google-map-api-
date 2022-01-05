@@ -29,7 +29,7 @@ class Branch(models.Model):
 class Doctor(models.Model):
     register_number =models.IntegerField(unique=True)
     name = models.CharField(max_length=128)
-    image = VersatileImageField(upload_to ='doctors')
+    image = VersatileImageField(upload_to ='doctors',blank=True,null=True)
     qualification = models.CharField(max_length=128)
     
     def __str__(self):
@@ -37,9 +37,12 @@ class Doctor(models.Model):
 
 
 class Schedule(models.Model):
+
+
     treatment = models.CharField(max_length=100)
     branch = models.ForeignKey(Branch,on_delete = models.CASCADE)
     doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE)
+    day = models.CharField(max_length=100)
     start_time = models.TimeField(max_length=100)
     end_time = models.TimeField(max_length=100)
 

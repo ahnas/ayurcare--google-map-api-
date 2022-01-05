@@ -2,11 +2,10 @@ from pathlib import Path
 from decouple import config, Csv
 
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = config('SECRET_KEY')
-
 
 DEBUG = config('DEBUG', default=True, cast=bool)
 
@@ -20,7 +19,7 @@ INSTALLED_APPS = [
 
     'versatileimagefield',
     'tinymce',
-    
+
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -32,6 +31,7 @@ INSTALLED_APPS = [
    
     'web',
     'official',
+    
 
 ]
 
@@ -58,6 +58,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'web.context_processors.main_context',
             ],
         },
     },

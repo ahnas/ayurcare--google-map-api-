@@ -7,8 +7,8 @@ function animatetoID(id) {
     }, 1000);
 }
 
-function setScroll(sectionId){
+function setScroll(sectionId) {
     localStorage.setItem("sectionId", sectionId);
-    window.location='http://127.0.0.1:8000/about/'
+    window.location = 'http://127.0.0.1:8000/about/'
 
 }

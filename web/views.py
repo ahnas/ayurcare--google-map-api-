@@ -1,18 +1,22 @@
 from django.db import models
-from django.http.response import JsonResponse
+from django.http.response import Http404, JsonResponse
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import json
-from web.models import Gallery,Treatement
+from web.models import Gallery, Treatment ,Subscribe,Testimonial
 from official.models import Branch, Doctor,Schedule,DistrictMap
-from .forms import ContactForm
+from .forms import ContactForm,SubscribeForm
 
 
 def index(request):
+    treatment = Treatment.objects.all()
+    testimonial = Testimonial.objects.filter().order_by('-id')[:4]
     context = {
-        "is_index" : True
+        "is_index" : True,
+        "treatment":treatment,
+        "testimonial":testimonial
     }
     return render(request, 'web/index.html',context)
 
@@ -31,7 +35,7 @@ def contact(request):
             form.save()
             response_data = {
                 "status" : "true",
-                "title" : "Successfully Submitted",
+                "title" : "Sent Successfully",
                 "message" : "Message successfully updated"
             }
         else:
@@ -103,10 +107,14 @@ def branchbook(request,id):
     branch = get_object_or_404(Branch,id=id)
     schedules = Schedule.objects.filter(branch = branch)
     whatsappbtn = ''
+    brname = ''
+    brnumber = ''
+    brday = ''
     if request.POST:
         scheduleID = request.POST['scheduleID']
         brname = request.POST['brname']
         brnumber = request.POST['brnumber']
+        brday = request.POST['brday']
         
         scheduleselect = Schedule.objects.get(id=scheduleID)
 
@@ -115,7 +123,7 @@ def branchbook(request,id):
 
         whatsappbtn = 'https://wa.me/+91'+str(branch.phone)
 
-        messagestring = '?text=Patient Name : '+brname+'%0aPatient Number : '+brnumber+\
+        messagestring = '?text=Patient Name : '+brname+'%0aPatient Number : '+brnumber+'%0aDay : '+brday+\
                 "%0a*-----Booking Details------*"
 
         messagestring += '%0aBranch : '+branch.name+\
@@ -131,6 +139,9 @@ def branchbook(request,id):
         "branch":branch,
         "schedules":schedules,   
         "whatsappbtn":whatsappbtn,
+        "brname":brname,
+        "brnumber":brnumber,
+        "brday":brday,
     }
     return render(request, 'web/branchbook.html',context)
 
@@ -140,10 +151,11 @@ def book(request,id):
     if request.POST:
         ptname = request.POST['ptname']
         ptnumber = request.POST['ptnumber']
+        ptday = request.POST['ptday']
         start = schedule.start_time.strftime("%I:%M %p")
         end = schedule.end_time.strftime("%I:%M %p")
         whatsappbtn = 'https://wa.me/+91'+str(schedule.branch.phone)
-        messagestring = '?text=Patient Name : '+ptname+'%0aPatient Number : '+ptnumber+\
+        messagestring = '?text=Patient Name : '+ptname+'%0aPatient Number : '+ptnumber+'%0aBooking Day : '+ptday+\
                 "%0a*-----Booking Details------*"
         messagestring += '%0aBranch : '+schedule.branch.name+\
                          '%0aLocation :'+schedule.branch.location+\
@@ -154,6 +166,9 @@ def book(request,id):
         "is_book" : True,
         "schedule":schedule,
         "whatsappbtn":whatsappbtn,
+        "ptname":ptname,
+        "ptnumber":ptnumber,
+        "ptday":ptday
         }
         
         return render(request, 'web/book.html',context)
@@ -172,5 +187,26 @@ def branchmark(request):
 def districtsr(request):
     districtsr = list(DistrictMap.objects.values())
     return JsonResponse(districtsr, safe=False)
+
+
+def email(request):
+    email_form = SubscribeForm(request.POST or None)
+    if request.method == 'POST':
+        if email_form.is_valid():
+            email_form.save()
+            response_data = {
+                "status" : "true",
+                "title" : "Subscribe Successfully",
+                "message" : "Get in Touch With U Soon !"
+            }
+        else:
+            print (email_form.errors)
+            response_data = {
+                "status" : "false",
+                "title" : "Form validation error",
+            }
+        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+    else:
+        return Http404("Poll Does not Exist")
   
 
