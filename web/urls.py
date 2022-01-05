@@ -17,5 +17,6 @@ urlpatterns = [
     path('districtsr/',views.districtsr,name="districtsr"),
 
     path('branchbook/<int:id>/',views.branchbook,name="branchbook"),
+    path('email/',views.email,name="email"),
 
 ]

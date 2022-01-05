@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Treatement,Gallery,Contact
+from .models import Subscribe, Treatment,Gallery,Contact,Testimonial
 
 
-@admin.register(Treatement)
-class TreatementAdmin(admin.ModelAdmin):
+@admin.register(Treatment)
+class TreatmentAdmin(admin.ModelAdmin):
     list_display =('title','summary')
 
 
@@ -11,8 +11,15 @@ class TreatementAdmin(admin.ModelAdmin):
 class GalleryAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Subscribe) 
+class SubscribeAdmin(admin.ModelAdmin):
+    pass
+
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    pass

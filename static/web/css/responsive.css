@@ -12,9 +12,9 @@
     .ayurrr {
         font-family: 'Marcellus', serif !important;
         background: rgba(49, 49, 49, 0.7);
-        right: 0;
+        
         padding: 45px;
-        margin-top: 60px;
+        
     }
     .ayurrr2 {
         margin-top: 130px;
@@ -112,9 +112,9 @@
     .ayurrr {
         font-family: 'Marcellus', serif !important;
         background: rgba(49, 49, 49, 0.7);
-        right: 0;
+        
         padding: 20px;
-        margin-top: 0px;
+        
         text-align: center;
     }
     .just {
@@ -265,7 +265,7 @@
         font-weight: 600;
     }
     .vision {
-        padding-top: 45%;
+        
     }
     .ayurrr2 {
         margin-top: 0px !important;
@@ -274,7 +274,7 @@
         background-color: white !important;
     }
     .ayur-sm p {
-        color: black !important;
+        
     }
     .ayurrr2 h2 {
         color: black !important;
@@ -294,12 +294,12 @@
         color: white;
     }
     .ayurrr {
-        left: 0;
+        
         font-family: 'Marcellus', serif !important;
         background: rgba(49, 49, 49, 0.7);
-        right: 0;
+        
         padding: 65px;
-        margin-top: 55px;
+        
         text-align: center;
     }
     .aboout img {
@@ -595,6 +595,12 @@
 }
 
 @media only screen and (max-width:768px) {
+    .tex-lef{
+        text-align: left;
+    }
+    .d-sm-non{
+        display: none;
+    }
     .posit-absl {
         position: fixed;
         z-index: 1000;
@@ -683,7 +689,7 @@
         font-weight: 600;
     }
     .vision {
-        padding-top: 45%;
+        
     }
     .ayurrr2 {
         margin-top: 0px !important;
@@ -692,7 +698,7 @@
         background-color: white !important;
     }
     .ayur-sm p {
-        color: black !important;
+        
     }
     .ayurrr2 h2 {
         color: black !important;
@@ -712,12 +718,12 @@
         color: white;
     }
     .ayurrr {
-        left: 0;
+        
         font-family: 'Marcellus', serif !important;
-        background: rgba(49, 49, 49, 0.7);
-        right: 0;
-        padding: 65px;
-        margin-top: 55px;
+        background: linear-gradient(black,black,#3f993c);
+        
+        padding: 46px;
+        
         text-align: center;
     }
     .aboout img {
@@ -1135,9 +1141,7 @@
         font-family: 'Marcellus', serif !important;
         font-weight: 600;
     }
-    .vision {
-        padding-top: 40%;
-    }
+    
     .ayurrr2 {
         margin-top: 0px !important;
         z-index: 10;
@@ -1145,7 +1149,7 @@
         background-color: white !important;
     }
     .ayur-sm p {
-        color: black !important;
+        
     }
     .ayurrr2 h2 {
         color: black !important;
@@ -1165,12 +1169,12 @@
         color: white;
     }
     .ayurrr {
-        left: 0;
+        
         font-family: 'Marcellus', serif !important;
-        background: rgba(49, 49, 49, 0.7);
-        right: 0;
+        background: linear-gradient(black,black,#3f993c);
+        
         padding: 50px;
-        margin-top: 50px;
+        
         text-align: center;
     }
     .aboout img {
@@ -1531,7 +1535,7 @@
         font-weight: 600;
     }
     .vision {
-        padding-top: 30%;
+        
     }
     .ayurrr2 {
         margin-top: 0px !important;
@@ -1540,7 +1544,7 @@
         background-color: white !important;
     }
     .ayur-sm p {
-        color: black !important;
+        
     }
     .ayurrr2 h2 {
         color: black !important;
@@ -1560,12 +1564,12 @@
         color: white;
     }
     .ayurrr {
-        left: 0;
+        
         font-family: 'Marcellus', serif !important;
-        background: rgba(49, 49, 49, 0.7);
-        right: 0;
+        background: linear-gradient(black,black,#3f993c);
+        
         padding: 20px;
-        margin-top: 37px;
+        
         text-align: center;
     }
     .aboout img {
@@ -1924,7 +1928,7 @@
         font-weight: 600;
     }
     .vision {
-        padding-top: 30%;
+        
     }
     .ayurrr2 {
         margin-top: 0px !important;
@@ -1933,7 +1937,7 @@
         background-color: white !important;
     }
     .ayur-sm p {
-        color: black !important;
+        
     }
     .ayurrr2 h2 {
         color: black !important;
@@ -1953,12 +1957,12 @@
         color: white;
     }
     .ayurrr {
-        left: 0;
+       
         font-family: 'Marcellus', serif !important;
-        background: rgba(49, 49, 49, 0.7);
-        right: 0;
+        background: linear-gradient(black,black,#3f993c);
+        
         padding: 20px;
-        margin-top: 37px;
+        
         text-align: center;
     }
     .aboout img {

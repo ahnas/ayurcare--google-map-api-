@@ -1,18 +1,22 @@
 from django.db import models
-from django.http.response import JsonResponse
+from django.http.response import Http404, JsonResponse
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 import json
-from web.models import Gallery,Treatement
+from web.models import Gallery, Treatment ,Subscribe,Testimonial
 from official.models import Branch, Doctor,Schedule,DistrictMap
-from .forms import ContactForm
+from .forms import ContactForm,SubscribeForm
 
 
 def index(request):
+    treatment = Treatment.objects.all()
+    testimonial = Testimonial.objects.filter().order_by('-id')[:4]
     context = {
-        "is_index" : True
+        "is_index" : True,
+        "treatment":treatment,
+        "testimonial":testimonial
     }
     return render(request, 'web/index.html',context)
 
@@ -183,5 +187,26 @@ def branchmark(request):
 def districtsr(request):
     districtsr = list(DistrictMap.objects.values())
     return JsonResponse(districtsr, safe=False)
+
+
+def email(request):
+    email_form = SubscribeForm(request.POST or None)
+    if request.method == 'POST':
+        if email_form.is_valid():
+            email_form.save()
+            response_data = {
+                "status" : "true",
+                "title" : "Subscribe Successfully",
+                "message" : "Get in Touch With U Soon !"
+            }
+        else:
+            print (email_form.errors)
+            response_data = {
+                "status" : "false",
+                "title" : "Form validation error",
+            }
+        return HttpResponse(json.dumps(response_data), content_type='application/javascript')
+    else:
+        return Http404("Poll Does not Exist")
   
 
